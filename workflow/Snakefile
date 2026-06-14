@@ -1,0 +1,38 @@
+from pathlib import Path
+
+from idp_beta.config import read_samples, read_simple_yaml
+from idp_beta.pipeline import IDP_OUTPUTS, workflow_chromosomes
+
+
+SAMPLES_PATH = Path(config.get("samples", "config/samples.tsv"))
+REFERENCES_PATH = Path(config.get("references", "config/references.yml"))
+WORKFLOW_PATH = Path(config.get("workflow", "config/workflow.yml"))
+IDP_PATH = Path(config.get("idp", "config/idp.yml"))
+
+SAMPLES = read_samples(SAMPLES_PATH)
+SAMPLE_IDS = [sample.sample_id for sample in SAMPLES]
+SAMPLE_BY_ID = {sample.sample_id: sample for sample in SAMPLES}
+REFERENCES = read_simple_yaml(REFERENCES_PATH)
+WORKFLOW = read_simple_yaml(WORKFLOW_PATH)
+CHROMOSOMES = workflow_chromosomes(WORKFLOW)
+READ_LENGTH = int(WORKFLOW.get("read_length", 150))
+THREADS = int(WORKFLOW.get("threads", 1))
+SUPPA_EVENTS = str(WORKFLOW.get("suppa_events", "SE SS MX RI FL")).split()
+GPD_KINDS = [name[:-4] for name in IDP_OUTPUTS]
+
+
+def sample_external_tpm(wildcards):
+    sample = SAMPLE_BY_ID[wildcards.sample]
+    return str(sample.external_tpm) if sample.external_tpm else "results/expression/allSamples.tpm.tsv"
+
+
+rule all:
+    input:
+        expand("results/suppa/{sample}.isoform_detection.psi", sample=SAMPLE_IDS),
+        "results/summary.tsv"
+
+
+include: "rules/short_reads.smk"
+include: "rules/long_reads.smk"
+include: "rules/idp.smk"
+include: "rules/postprocess.smk"

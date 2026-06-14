@@ -1,0 +1,25 @@
+# Defaults reconstructed from the manuscript and local historical scripts.
+Nthread: 10
+Njun_limit: 10
+Niso_limit: 20
+L_exon_limit: 1700
+L_min_intron: 68
+Bfile_Npt: 500
+Bfile_Nbin: 5
+exon_construction_junction_span: 1
+python_path: python
+aligner_choice: gmap
+blat_executable_pathfilename: blat
+gmap_executable_pathfilename: gmap
+seqmap_executable_pathfilename: seqmap
+read_length: 150
+min_junction_overlap_len: 10
+CAGE_data_filename:
+detected_exp_len:
+I_refjun_isoformconstruction: 1
+I_ref5end_isoformconstruction: 1
+I_ref3end_isoformconstruction: 1
+estimator_choice: MLE
+FPR:
+min_isoform_fraction: 0.1
+min_isoform_rpkm: 1

@@ -1,0 +1,16 @@
+# Absolute paths are recommended for production reruns.
+# These placeholder paths let `validate-config --no-check-files` check schema before data is staged.
+build: GRCh38
+genome_fasta: data/references/GRCh38.fa
+chromosome_sizes: data/references/GRCh38.chrom.sizes
+hisat2_index: data/references/hisat2/GRCh38
+gmap_database: data/references/gmap/GRCh38
+reference_gpd: data/references/GRCh38.annotation.gpd
+allref_gpd: data/references/GRCh38.all.gene.refFlat.txt
+genePredToGtf: /usr/local/bin/genePredToGtf
+suppa: suppa.py
+
+# Optional executable overrides used by generated IDP configs.
+blat_executable_pathfilename: blat
+gmap_executable_pathfilename: gmap
+seqmap_executable_pathfilename: seqmap

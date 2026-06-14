@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "idp-beta"
+version = "0.1.0"
+description = "Reproducible GRCh38 Snakemake workflow for hybrid IDP-fusion and SUPPA isoform analysis."
+readme = "README.md"
+requires-python = ">=3.9"
+license = {text = "Apache-2.0"}
+authors = [{name = "IDP_BETA maintainers"}]
+dependencies = []
+
+[project.optional-dependencies]
+workflow = ["snakemake>=7"]
+
+[project.scripts]
+idp-beta = "idp_beta.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["idp_beta*"]

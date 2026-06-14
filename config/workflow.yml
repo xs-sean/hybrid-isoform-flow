@@ -1,0 +1,21 @@
+chromosomes: [chr1, chr2, chr3, chr4, chr5, chr6, chr7, chr8, chr9, chr10, chr11, chr12, chr13, chr14, chr15, chr16, chr17, chr18, chr19, chr20, chr21, chr22, chrX, chrY, chrM]
+threads: 10
+read_length: 150
+
+# Short-read preprocessing and alignment.
+trimmomatic_jar: trimmomatic
+trimmomatic_options: "TRAILING:20 MINLEN:235 CROP:235"
+hisat2_options: "--dta"
+
+# Long-read correction and alignment.
+# Available fmlrc_command placeholders: {input}/{long_read}, {output},
+# {short_read_1}, {short_read_2}, {trimmed_read_1}, {trimmed_read_2},
+# {short_read_msbwt}, and {fmlrc_options}.
+fmlrc_command: "fmlrc {fmlrc_options} {short_read_msbwt} {input} {output}"
+fmlrc_options: ""
+short_read_msbwt: data/references/short_reads.msbwt.npy
+gmap_options: "-f 1 -n 1"
+
+# Runtime wrappers.
+container_image: idp-beta-py2
+suppa_events: "SE SS MX RI FL"

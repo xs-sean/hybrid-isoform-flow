@@ -1,0 +1,5 @@
+sample_id	condition	isoseq_reads	short_read_1	short_read_2	external_tpm
+# Add one row per sample.
+# isoseq_reads should be IsoSeq/CCS/FLNC FASTA/BAM exported by PacBio tooling.
+# external_tpm is optional; if omitted, IDP isoform.exp files are merged for SUPPA PSI.
+# Con1	control	data/isoseq/Con1.flnc.fa	data/illumina/Con1_R1.fastq.gz	data/illumina/Con1_R2.fastq.gz	data/expression/allSamples.tpm.tsv
